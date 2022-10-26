@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+
+	<excludes>
+	<pattern>/sub*</pattern>
+		<pattern>/pdf*</pattern>
+		<pattern>/thymeleaf*</pattern>
+	</excludes>
+
+	<!-- apply Sitemesh default template -->
+	<decorator name="web" page="web.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+
+	<!-- apply Sitemesh admin template -->
+	<decorator name="admin" page="admin.jsp">
+		<pattern>/admin*</pattern>
+	</decorator>
+
+	<!-- apply Sitemesh admin template -->
+	<decorator name="login" page="login.jsp">
+		<pattern>/login</pattern>
+	</decorator>
+	<!-- apply Sitemesh admin template -->
+	<decorator name="sign-in" page="login.jsp">
+		<pattern>/sign-in</pattern>
+	</decorator>
+
+</decorators>
