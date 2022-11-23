@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Hóa Đơn</title>
+<style type='text/css'>
+*{
+font-family: DejaVu Sans;
+}
+@page {
+	size: A4
+}
+@page {
+	margin: 0
+}
+body {
+	margin: 0;
+	
+}
+.sheet {
+	margin: 0;
+	overflow: hidden;
+	position: relative;
+	box-sizing: border-box;
+	page-break-after: always;
+}
+body.A3               .sheet {
+	width: 297mm;
+	height: 419mm
+}
+body.A3.landscape     .sheet {
+	width: 420mm;
+	height: 296mm
+}
+body.A4               .sheet {
+	width: 210mm;
+	height: 296mm
+}
+body.A4.landscape     .sheet {
+	width: 297mm;
+	height: 209mm
+}
+body.A5               .sheet {
+	width: 148mm;
+	height: 209mm
+}
+body.A5.landscape     .sheet {
+	width: 210mm;
+	height: 147mm
+}
+body.letter           .sheet {
+	width: 216mm;
+	height: 279mm
+}
+body.letter.landscape .sheet {
+	width: 280mm;
+	height: 215mm
+}
+body.legal            .sheet {
+	width: 216mm;
+	height: 356mm
+}
+body.legal.landscape  .sheet {
+	width: 357mm;
+	height: 215mm
+}
+.sheet.padding-10mm {
+	padding: 10mm
+}
+.sheet.padding-15mm {
+	padding: 15mm
+}
+.sheet.padding-20mm {
+	padding: 20mm
+}
+.sheet.padding-25mm {
+	padding: 25mm
+}
+@media screen {
+	body {
+		background: #e0e0e0
+	}
+	.sheet {
+		background: white;
+		box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+		margin: 5mm auto;
+	}
+}
+@media print {
+	body.A3.landscape {
+		width: 420mm
+	}
+	body.A3, body.A4.landscape {
+		width: 297mm
+	}
+	body.A4, body.A5.landscape {
+		width: 210mm
+	}
+	body.A5 {
+		width: 148mm
+	}
+	body.letter, body.legal {
+		width: 216mm
+	}
+	body.letter.landscape {
+		width: 280mm
+	}
+	body.legal.landscape {
+		width: 357mm
+	}
+}
+</style>
+</head>
+
+<body class="A4">
+	<section class="sheet padding-10mm">
+	<table border="0" width="100%" cellspacing="0">
+		<tbody>
+			<tr>
+				<td align="center"></td>
+				<td align="center"><b style="font-size: 2em;">Hóa Đơn Thanh Toán</b> <br /> 
+				<small></small><br /> 
+				<small></small>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- Thông tin đơn hàng -->
+	<p>
+		<i><u>Thông tin Đơn hàng</u></i>
+	</p>
+	<table border="0" width="100%" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="30%" th:text="'Khách hàng: ' + ${model.username} +'        SĐT: '+ ${model.number}"> </td>
+				
+			</tr>
+			<tr>
+				<td width="30%" th:text="'Địa chỉ: '+${model.username}"></td>
+			</tr>
+			<tr>
+			
+				<td width="100%" th:text="'Ngày lập: '+${model.shipDate}"></td>
+			</tr>
+			<tr>
+			
+				<td th:text="'Tổng thành tiền: '+${model.totalPrice}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- Thông tin sản phẩm -->
+	<p>
+		<i><u>Chi tiết đơn hàng</u></i>
+	</p>
+	<table border="1" width="100%" cellspacing="0" cellpadding="5">
+		<thead>
+			<tr>
+				<th>STT</th>
+				<th>Sản phẩm</th>
+				<th>Số lượng</th>
+				<th>Đơn giá</th>
+				<th>Thành tiền</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr th:each="item, iter: ${model.orderDetails}">
+				<td align="center" th:text="${iter.index}"></td>
+				
+				<td>
+				<small><i th:text="'Tên:' + ${item.book.title}"></i></small><br></br>
+				<small><i th:text="'Mã:' + ${item.book.bookCode}"></i></small>
+				</td>
+				<td align="right" th:text="${item.quantity}"></td>
+				<td align="right" th:text="${item.unitPrice}"></td>
+				<td align="right" th:text="${item.totalPrice}"></td>
+				
+			</tr>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4" align="right"><b>Tổng tiền</b></td>
+				<td align="right" th:text="${model.totalPrice}"><b></b></td>
+			</tr>
+		</tfoot>
+	</table>
+
+	<!-- Thông tin Footer --> <br />
+	<table border="0" width="100%">
+		<tbody>
+			<tr>
+				<td align="center"><small>Xin cám ơn quý khách</small></td>
+			</tr>
+		</tbody>
+	</table>
+	</section>
+	<!-- End block content -->
+</body>
+
+</html>
